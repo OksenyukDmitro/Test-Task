@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TestTask.Views.TagPage"
+              Title="{Binding Title}"
+             x:Name="BrowseItemsPage">
+    
+    <StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Button Text="X" Clicked="Exit_Clicked"
+                HorizontalOptions="Start"
+                FontSize="Large"
+                BorderColor="Transparent"
+                BackgroundColor="Transparent"/>
+            <Label Text="{Binding Title}" 
+                LineBreakMode="NoWrap" 
+                HorizontalOptions="StartAndExpand"
+                FontSize="Medium"
+                Margin="0,13,0,0"/>
+        </StackLayout>
+        
+        <StackLayout Orientation="Horizontal">
+            <SearchBar TextChanged="SearchBar_TextChanged"
+                       HorizontalOptions="FillAndExpand"
+                       Margin="4,2,9,4"
+                       Placeholder="Tag"
+                       PlaceholderColor="Coral"
+                       BackgroundColor="SaddleBrown"/>
+        </StackLayout>
+    
+            <ListView x:Name="TagsListView"
+                ItemsSource="{Binding Tags}"
+                VerticalOptions="FillAndExpand"
+                HasUnevenRows="true"
+                CachingStrategy="RecycleElement"
+                ItemSelected="OnItemSelected"
+                Grid.Row = "0" Grid.Column = "0" Grid.RowSpan = "2" Grid.ColumnSpan = "3" 
+                HorizontalOptions="FillAndExpand">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="10">                               
+                                <Label Text="{Binding Name}" 
+                                LineBreakMode="NoWrap" 
+                                Style="{DynamicResource ListItemTextStyle}" 
+                                FontSize="16" />
+                            <Label Text="{Binding Count, StringFormat='count = {0}'}" 
+                                LineBreakMode="NoWrap" 
+                                Style="{DynamicResource ListItemTextStyle}" 
+                                FontSize="16" />
+                        </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>           
+    </StackLayout>
+</ContentPage>

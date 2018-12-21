@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TestTask.Views.ItemsPage"
+              Title="{Binding Title}"
+             x:Name="BrowseItemsPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="LabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="#ded8dd"/>
+                <Setter Property="Opacity" Value="30"/>
+                <Setter Property="FontSize" Value="16"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+  
+      <StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Label 
+                Text="#TAGS" 
+                HorizontalOptions="Fill"
+                Margin="10,15,0,0"
+                FontSize="13" 
+                x:Name ="LabelTags"
+                WidthRequest="50" 
+                MinimumWidthRequest="50"/>
+            <SearchBar x:Name="TextSearchBar"
+                       TextChanged="SearchBar_TextChanged"
+                       HorizontalOptions="FillAndExpand"
+                       Margin="0,3,5,0"
+                       BackgroundColor="Honeydew"
+                       TextColor="BurlyWood"
+                       Placeholder="Word or tag"
+                       PlaceholderColor="Coral"/>
+        </StackLayout>
+        
+        <Grid>
+        <ListView x:Name="ItemsListView"
+                ItemsSource="{Binding Items}"
+                VerticalOptions="FillAndExpand"
+                HasUnevenRows="true"
+                CachingStrategy="RecycleElement"
+                ItemSelected="OnItemSelected"
+                Grid.Row = "0" Grid.Column = "0" Grid.RowSpan = "2" Grid.ColumnSpan = "3" 
+                 HorizontalOptions="FillAndExpand">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10">
+                                <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding Text}" 
+                                LineBreakMode="WordWrap " 
+                                Style="{DynamicResource ListItemTextStyle}" 
+                                HorizontalOptions="Start"
+                                FontSize="16" />
+                            <Label Text="{Binding Transcript, StringFormat='[{0}]'}" 
+                                HorizontalOptions="StartAndExpand"
+                                LineBreakMode="WordWrap " 
+                                Style="{StaticResource Key=LabelStyle}" 
+                                FontSize="16" />
+                            </StackLayout>
+                            <Label Text="{Binding Translate}" 
+                                LineBreakMode="WordWrap "
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="13" />
+                            <Label Text="{Binding Tag}" 
+                                TextColor="Brown"
+                                LineBreakMode="WordWrap " 
+                                Style="{DynamicResource ListItemTextStyle}" 
+                                FontSize="16" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+          
+        <Button HorizontalOptions="EndAndExpand" VerticalOptions="End" Text="+"
+              Grid.Row="1" Grid.Column = "2"
+              Clicked="AddItem_Clicked"
+              Margin="0,0,10,10" 
+              FontSize="16">
+            <Button.WidthRequest>
+                <OnIdiom x:TypeArguments="x:Double" Phone="60" Tablet="80" />
+            </Button.WidthRequest>
+            <Button.HeightRequest>
+                <OnIdiom x:TypeArguments="x:Double" Phone="60" Tablet="80" />
+            </Button.HeightRequest>
+            <Button.BorderRadius>
+                <OnIdiom x:TypeArguments="x:Int32" Phone="30" Tablet="40" />
+            </Button.BorderRadius>
+        </Button>
+      </Grid>
+    </StackLayout>
+</ContentPage>
