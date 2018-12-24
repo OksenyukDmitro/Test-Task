@@ -24,7 +24,7 @@ namespace TestTask.Views
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new ItemsViewModel();
+            BindingContext = viewModel = new ItemsViewModel() { Navigation = this.Navigation, TextSearchBar = this.TextSearchBar};
 
             ItemsListView.ItemsSource = viewModel.Items.Take(countItemToShow);
 
@@ -44,19 +44,7 @@ namespace TestTask.Views
                 }
             };
 
-            LabelTags.GestureRecognizers.Add(new TapGestureRecognizer {
-                Command = new Command(() => OnLabelClicked()),
-            });
-        }
-
-        async private void OnLabelClicked()
-        {
-            await Navigation.PushModalAsync( new TagPage(ref TextSearchBar, viewModel.Items));
-        }
-
-        async private void OnLabelTagClicked( )
-        {
-            await Navigation.PushModalAsync(new TagPage(ref TextSearchBar, viewModel.Items));
+           
         }
 
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
@@ -86,11 +74,6 @@ namespace TestTask.Views
             ItemsListView.SelectedItem = null;
         }
 
-        async void AddItem_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync (new NewItemPage());
-        }
-      
         protected override void OnAppearing()
         {
             base.OnAppearing();

@@ -4,6 +4,9 @@
              x:Class="TestTask.Views.ItemsPage"
               Title="{Binding Title}"
              x:Name="BrowseItemsPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="iconexample" Icon="icon.png" Priority="0" Order="Primary" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="LabelStyle" TargetType="Label">
@@ -18,20 +21,24 @@
         <StackLayout Orientation="Horizontal">
             <Label 
                 Text="#TAGS" 
-                HorizontalOptions="Fill"
+                HorizontalOptions="Start"
                 Margin="10,15,0,0"
                 FontSize="13" 
                 x:Name ="LabelTags"
                 WidthRequest="50" 
-                MinimumWidthRequest="50"/>
-            <SearchBar x:Name="TextSearchBar"
+                MinimumWidthRequest="50">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ShowTagsCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+                <SearchBar x:Name="TextSearchBar"
                        TextChanged="SearchBar_TextChanged"
                        HorizontalOptions="FillAndExpand"
                        Margin="0,3,5,0"
-                       BackgroundColor="Honeydew"
-                       TextColor="BurlyWood"
-                       Placeholder="Word or tag"
-                       PlaceholderColor="Coral"/>
+                       BackgroundColor="Coral"
+                       TextColor="Honeydew"
+                       Placeholder="Input word or tag"
+                       PlaceholderColor="BurlyWood"/>
         </StackLayout>
         
         <Grid>
@@ -50,6 +57,7 @@
                                 <StackLayout Orientation="Horizontal">
                             <Label Text="{Binding Text}" 
                                 LineBreakMode="WordWrap " 
+
                                 Style="{DynamicResource ListItemTextStyle}" 
                                 HorizontalOptions="Start"
                                 FontSize="16" />
@@ -76,7 +84,7 @@
           
         <Button HorizontalOptions="EndAndExpand" VerticalOptions="End" Text="+"
               Grid.Row="1" Grid.Column = "2"
-              Clicked="AddItem_Clicked"
+              Command="{Binding AddItemCommand}"
               Margin="0,0,10,10" 
               FontSize="16">
             <Button.WidthRequest>
