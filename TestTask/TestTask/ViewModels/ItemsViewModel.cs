@@ -17,7 +17,7 @@ namespace TestTask.ViewModels
         public Command LoadItemsCommand { get; set; }
         public ICommand AddItemCommand { get; set; }
         public ICommand ShowTagsCommand { get; set; }
-        public string Tag { get; set; }
+        
         public INavigation Navigation { get; set; }
         public SearchBar TextSearchBar;
         public ItemsViewModel()

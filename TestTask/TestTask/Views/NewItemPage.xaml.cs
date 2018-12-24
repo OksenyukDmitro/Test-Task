@@ -12,16 +12,16 @@ namespace TestTask.Views
     public partial class NewItemPage : ContentPage
     {
         public Item Item { get; set; }
-
+        List<string> tags;
         public NewItemPage()
         {
             InitializeComponent();
-
+            tags = new List<string>();
             Item = new Item
             {
                 Text = "Item name",
                 Translate = "This is an item description.",
-                Tag = "#1",
+                Tag = tags,
                 Transcript = " ˈelɪmənt  neɪm ",
             };
 
@@ -37,6 +37,13 @@ namespace TestTask.Views
         async void Cancel_Clicked(object sender, EventArgs e)
         {
             await Navigation.PopAsync();
+        }
+
+        void AddTag_Clicked(object sender, EventArgs e)
+        {
+            tags.Add("#" + NewTag.Text);          
+            AllTag.Text += NewTag.Text + " ";
+            NewTag.Text = "";
         }
     }
 }

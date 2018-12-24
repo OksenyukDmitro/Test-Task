@@ -71,12 +71,30 @@
                                 LineBreakMode="WordWrap "
                                 Style="{DynamicResource ListItemDetailTextStyle}"
                                 FontSize="13" />
-                            <Label Text="{Binding Tag}" 
-                                TextColor="Brown"
-                                LineBreakMode="WordWrap " 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="16" />
-                        </StackLayout>
+                                <ScrollView>
+                                    <ListView SeparatorVisibility="None" ItemsSource="{Binding Tag}"   
+                                          HasUnevenRows="true"
+                                          HeightRequest="63"
+                                          ItemSelected="OnTagSelected"  >
+                                    <ListView.ItemTemplate >
+                                        <DataTemplate>
+                                            <ViewCell>
+                                               
+                                                    <StackLayout   >
+                                                        <Label Text="{Binding .}" 
+                                                            TextColor="Brown"
+                                                            LineBreakMode="WordWrap " 
+                                                            Style="{DynamicResource ListItemTextStyle}" 
+                                                            FontSize="16" />
+                                                    </StackLayout>
+                                               
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                                </ScrollView>
+
+                            </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

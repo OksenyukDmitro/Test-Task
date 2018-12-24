@@ -54,21 +54,38 @@ namespace TestTask.ViewModels
 
         private void ExecuteTagInitCommand()
         {
+            Tags = new ObservableCollection<Tag>();
+            Tags.Add(new Tag { Name = "hh", Count = 1 });
+
             for (int i = 0; i < Items.Count; i++)
             {
                 bool uniqueTag = true;
+                string uniqueTagString = "";
 
-                foreach (var tag in Tags)
-                    if (tag.Name.Equals(Items[i].Tag))
-                    {
-                        uniqueTag = false;
-                        tag.Count++;
-                        break;
-                    }
-                if (uniqueTag)
+
+                foreach (var tag in Items[i].Tag)
                 {
-                    Tags.Add(new Tag { Name = Items[i].Tag, Count = 1 });
+                    foreach (var tags in Tags)
+                    {
+
+
+                        if (tags.Name.Equals(tag))
+                        {
+                            uniqueTag = false;
+                            tags.Count++;
+                            break;
+                        }
+
+
+                    }
+                    uniqueTagString = tag;
+
+                    if (uniqueTag)
+                    {
+                        Tags.Add(new Tag { Name = uniqueTagString, Count = 1 });
+                    }
                 }
+
             }
         }
     }

@@ -25,14 +25,17 @@
         <ScrollView>
         <StackLayout Spacing="20" Padding="15">
             <Label Text="Text" FontSize="Medium" />
-            <Entry Text="{Binding Item.Text}" FontSize="Small" Keyboard="Text" ReturnType="Next"/>
-            <Label Text="Tag" FontSize="Medium" />
-            <Entry Text="{Binding Item.Tag}" FontSize="Small" Margin="0" ReturnType="Next" />
+            <Entry Text="{Binding Item.Text}" FontSize="Small" Keyboard="Text" ReturnType="Next"/>            
             <Label Text="Transcript" FontSize="Medium" />
             <Entry Text="{Binding Item.Transcript}" FontSize="Small" Margin="0" ReturnType="Next"/>
             <Label Text="Translate" FontSize="Medium" />
             <Editor Text="{Binding Item.Translate}" FontSize="Small" Margin="0" />
-        </StackLayout>
+            <Label Text="Tag" FontSize="Medium" />
+            <Entry x:Name="NewTag"  Text="Tag" FontSize="Small" Margin="0" ReturnType="Done" /> 
+            <Label x:Name="AllTag" Text="tags: "/>
+            <Button Text="Add tag" Clicked="AddTag_Clicked"/>
+         
+            </StackLayout>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

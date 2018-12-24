@@ -11,6 +11,7 @@ using TestTask.Models;
 using TestTask.Views;
 using TestTask.ViewModels;
 using System.Collections.ObjectModel;
+using Xamarin.Forms.Internals;
 
 namespace TestTask.Views
 {
@@ -25,7 +26,7 @@ namespace TestTask.Views
             InitializeComponent();
 
             BindingContext = viewModel = new ItemsViewModel() { Navigation = this.Navigation, TextSearchBar = this.TextSearchBar};
-
+            
             ItemsListView.ItemsSource = viewModel.Items.Take(countItemToShow);
 
             ItemsListView.ItemAppearing += (sender, e) =>
@@ -57,7 +58,8 @@ namespace TestTask.Views
 
             else if (e.NewTextValue[0].Equals('#'))
             {
-                ItemsListView.ItemsSource = viewModel.Items.Where(x => x.Tag.StartsWith(e.NewTextValue));
+                
+                ItemsListView.ItemsSource = viewModel.Items.Where(x => x.Tag.Contains(e.NewTextValue));
             }
             else
             {
@@ -67,13 +69,25 @@ namespace TestTask.Views
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
+          
+          
             var item = args.SelectedItem as Item;
             if (item == null)
                 return;
             await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
             ItemsListView.SelectedItem = null;
         }
+        
+              async void OnTagSelected(object sender, SelectedItemChangedEventArgs args)
+        {
 
+
+            var item = args.SelectedItem as String;
+            if (item == null)
+                return;
+            TextSearchBar.Text = item;
+            ItemsListView.SelectedItem = null;
+        }
         protected override void OnAppearing()
         {
             base.OnAppearing();
