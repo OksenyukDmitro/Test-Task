@@ -55,7 +55,7 @@ namespace TestTask.ViewModels
         private void ExecuteTagInitCommand()
         {
             Tags = new ObservableCollection<Tag>();
-            Tags.Add(new Tag { Name = "hh", Count = 1 });
+            
 
             for (int i = 0; i < Items.Count; i++)
             {

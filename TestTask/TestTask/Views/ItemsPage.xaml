@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:xf="clr-namespace:Xamarin.Forms"
              x:Class="TestTask.Views.ItemsPage"
               Title="{Binding Title}"
              x:Name="BrowseItemsPage">
@@ -37,7 +38,7 @@
                        Margin="0,3,5,0"
                        BackgroundColor="Coral"
                        TextColor="Honeydew"
-                       Placeholder="Input word or tag"
+                       Placeholder="Input word "
                        PlaceholderColor="BurlyWood"/>
         </StackLayout>
         
@@ -49,6 +50,7 @@
                 CachingStrategy="RecycleElement"
                 ItemSelected="OnItemSelected"
                 Grid.Row = "0" Grid.Column = "0" Grid.RowSpan = "2" Grid.ColumnSpan = "3" 
+                  
                  HorizontalOptions="FillAndExpand">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -71,28 +73,33 @@
                                 LineBreakMode="WordWrap "
                                 Style="{DynamicResource ListItemDetailTextStyle}"
                                 FontSize="13" />
-                                <ScrollView>
-                                    <ListView SeparatorVisibility="None" ItemsSource="{Binding Tag}"   
-                                          HasUnevenRows="true"
-                                          HeightRequest="63"
-                                          ItemSelected="OnTagSelected"  >
-                                    <ListView.ItemTemplate >
+                                
+                                    <ListView  ItemsSource="{Binding Tag}"   
+                                          ItemSelected="OnTagSelected" 
+                                         HasUnevenRows="True"
+                                               SeparatorVisibility="None">
+                                    <ListView.Behaviors>
+                                        <xf:AutoSizeBehavior ExtraSpace="0"/>
+                                    </ListView.Behaviors>
+                                    <ListView.ItemTemplate  >
                                         <DataTemplate>
-                                            <ViewCell>
-                                               
-                                                    <StackLayout   >
-                                                        <Label Text="{Binding .}" 
+                                                <ViewCell>
+                                                    <ViewCell.View >
+                                                        <StackLayout >
+                                                            <Label Text="{Binding .}" 
                                                             TextColor="Brown"
                                                             LineBreakMode="WordWrap " 
                                                             Style="{DynamicResource ListItemTextStyle}" 
                                                             FontSize="16" />
-                                                    </StackLayout>
-                                               
+                                                        </StackLayout>
+                                                    </ViewCell.View>
+
+                                                    
                                             </ViewCell>
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
                                 </ListView>
-                                </ScrollView>
+                               
 
                             </StackLayout>
                     </ViewCell>

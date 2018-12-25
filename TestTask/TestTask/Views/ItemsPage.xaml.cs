@@ -57,8 +57,7 @@ namespace TestTask.Views
             }
 
             else if (e.NewTextValue[0].Equals('#'))
-            {
-                
+            {                
                 ItemsListView.ItemsSource = viewModel.Items.Where(x => x.Tag.Contains(e.NewTextValue));
             }
             else
@@ -78,7 +77,7 @@ namespace TestTask.Views
             ItemsListView.SelectedItem = null;
         }
         
-              async void OnTagSelected(object sender, SelectedItemChangedEventArgs args)
+               void OnTagSelected(object sender, SelectedItemChangedEventArgs args)
         {
 
 

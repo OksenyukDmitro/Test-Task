@@ -16,7 +16,7 @@ namespace TestTask.Services
             var mockItems = new List<Item>();
 
             
-            mockItems.Add(new Item { Id = Guid.NewGuid().ToString(), Text = "meat", Translate = "м'ясо", Tag = new List<string>() { "#" + "food", "#" + "emotions", "#" + "emotions" }, Transcript = "mēt" });
+            mockItems.Add(new Item { Id = Guid.NewGuid().ToString(), Text = "meat", Translate = "м'ясо", Tag = new List<string>() { "#" + "food", "#" + "emotions", "#" + "people" }, Transcript = "mēt" });
             mockItems.Add(new Item { Id = Guid.NewGuid().ToString(), Text = "beef", Translate = "яловичина", Tag = new List<string>() { "#" + "food", "#" + "people" }, Transcript = "bēf" });
             mockItems.Add(new Item { Id = Guid.NewGuid().ToString(), Text = "angry", Translate = "сердитий", Tag = new List<string>() { "#" + "emotions", "#" + "people" }, Transcript = "ˈæŋɡri" });
             mockItems.Add(new Item { Id = Guid.NewGuid().ToString(), Text = "dreamy", Translate = "мрійливий", Tag = new List<string>() { "#" + "emotions", "#" + "weather" }, Transcript = "ˈdriːmi" });

@@ -8,6 +8,25 @@
         <Label Text="{Binding Item.Text ,StringFormat='Text: {0}'}" FontSize="Medium"/>
         <Label Text="{Binding Item.Translate ,StringFormat='Translate: {0}'}" FontSize="Medium"/>
         <Label Text="{Binding Item.Transcript ,StringFormat='Transcript: {0}'}" FontSize="Medium"/>
-        <Label Text="{Binding Item.Tag ,StringFormat='Tag: {0}'}" FontSize="Medium"/>
+        <Label Text="Tags: " FontSize="Medium"/>
+        <ListView SeparatorVisibility="None" ItemsSource="{Binding Item.Tag}"   
+                                          HasUnevenRows="true"
+                                         >
+            <ListView.ItemTemplate >
+                <DataTemplate>
+                    <ViewCell>
+
+                        <StackLayout   >
+                            <Label Text="{Binding .}" 
+                           
+                             LineBreakMode="WordWrap " 
+                             Style="{DynamicResource ListItemTextStyle}" 
+                              FontSize="16" />
+                        </StackLayout>
+
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </StackLayout>
 </ContentPage>
