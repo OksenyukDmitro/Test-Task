@@ -38,8 +38,22 @@ namespace Xamarin.Forms
             base.OnAttachedTo(bindable);
 
             _listView = bindable;
+           
             _listView.PropertyChanged += (s, args) =>
             {
+                
+                var stringTag = _listView.ItemsSource?.Cast<string[]>();
+             //   _listView.ItemsSource?;
+            /*    if (stringTag.Count() > 0)
+                {
+                    foreach(var str in stringTag)
+                    {
+                        if(str.Length > 40)
+                        {
+                            ExtraSpace += 15;
+                        }
+                    }
+                }*/
                 var count = _listView.ItemsSource?.Cast<object>()?.Count();
                 if (args.PropertyName == nameof(_listView.ItemsSource)
                         && count.HasValue

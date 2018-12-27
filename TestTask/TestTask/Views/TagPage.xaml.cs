@@ -31,13 +31,23 @@ namespace TestTask.Views
         
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (string.IsNullOrEmpty(e.NewTextValue))
+            var searchTag = e.NewTextValue.Trim();
+            if (string.IsNullOrEmpty(searchTag))
             {
                 TagsListView.ItemsSource = viewModel.Tags;
             }
             else
             {
-                TagsListView.ItemsSource = viewModel.Tags.Where(x => x.Name.StartsWith(e.NewTextValue));
+               
+                if (searchTag[0].Equals('#'))
+                {
+                    TagsListView.ItemsSource = viewModel.Tags.Where(x => x.Name.StartsWith(searchTag));
+                }
+                else
+                {
+                     searchTag = "#" + searchTag;
+                    TagsListView.ItemsSource = viewModel.Tags.Where(x => x.Name.StartsWith(searchTag));
+                }
             }
         }
          void OnItemSelected(object sender, SelectedItemChangedEventArgs args)

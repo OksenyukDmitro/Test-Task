@@ -62,10 +62,10 @@ namespace TestTask.Views
             }
             else
             {
-                ItemsListView.ItemsSource = viewModel.Items.Where(x => x.Text.StartsWith(e.NewTextValue));
+                ItemsListView.ItemsSource = viewModel.Items.Where(x => x.Text.StartsWith(e.NewTextValue.Trim()));
             }
         }
-
+       
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
           
@@ -80,12 +80,12 @@ namespace TestTask.Views
                void OnTagSelected(object sender, SelectedItemChangedEventArgs args)
         {
 
-
+            var list = sender as ListView;
             var item = args.SelectedItem as String;
             if (item == null)
                 return;
             TextSearchBar.Text = item;
-            ItemsListView.SelectedItem = null;
+            list.SelectedItem = null;
         }
         protected override void OnAppearing()
         {

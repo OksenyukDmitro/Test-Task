@@ -18,12 +18,13 @@
         </ResourceDictionary>
     </ContentPage.Resources>
   
-      <StackLayout>
-        <StackLayout Orientation="Horizontal">
+      <StackLayout >
+        <StackLayout Orientation="Horizontal" Padding="0,0,20,0">
             <Label 
                 Text="#TAGS" 
                 HorizontalOptions="Start"
-                Margin="10,15,0,0"
+                VerticalOptions="Center"
+                Margin="10,5,0,0"
                 FontSize="13" 
                 x:Name ="LabelTags"
                 WidthRequest="50" 
@@ -64,8 +65,8 @@
                                 HorizontalOptions="Start"
                                 FontSize="16" />
                             <Label Text="{Binding Transcript, StringFormat='[{0}]'}" 
-                                HorizontalOptions="StartAndExpand"
-                                LineBreakMode="WordWrap " 
+                                HorizontalOptions="FillAndExpand"
+                                LineBreakMode="WordWrap" 
                                 Style="{StaticResource Key=LabelStyle}" 
                                 FontSize="16" />
                             </StackLayout>
@@ -73,8 +74,9 @@
                                 LineBreakMode="WordWrap "
                                 Style="{DynamicResource ListItemDetailTextStyle}"
                                 FontSize="13" />
-                                
-                                    <ListView  ItemsSource="{Binding Tag}"   
+
+                                <ListView 
+                                          ItemsSource="{Binding Tag}"   
                                           ItemSelected="OnTagSelected" 
                                          HasUnevenRows="True"
                                                SeparatorVisibility="None">

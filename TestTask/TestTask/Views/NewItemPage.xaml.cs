@@ -5,6 +5,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using TestTask.Models;
+using System.Text.RegularExpressions;
 
 namespace TestTask.Views
 {
@@ -30,25 +31,32 @@ namespace TestTask.Views
 
         async void Save_Clicked(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(Item.Text) || string.IsNullOrEmpty(Item.Translate) || string.IsNullOrEmpty(Item.Transcript) || Item.Tag.Count == 0)
+            EntryText.Text = EntryText.Text.Trim();
+            EntryTranscript.Text = EntryTranscript.Text.Trim();
+            EntryTranslate.Text = EntryTranslate.Text.Trim();
+            
+            if (string.IsNullOrEmpty(Item.Text) || string.IsNullOrEmpty(Item.Translate) || string.IsNullOrEmpty(Item.Transcript) || Item.Tag.Count == 0 )
             {
-                if (Text.PlaceholderColor == Color.Red)
+                if (EntryText.PlaceholderColor == Color.Red)
                 {
-                    Text.PlaceholderColor = Color.Yellow;
-                    Transcript.PlaceholderColor = Color.Yellow;
-                    Translate.PlaceholderColor = Color.Yellow;
-                    NewTag.PlaceholderColor = Color.Yellow;
+                    EntryText.PlaceholderColor = Color.Yellow;
+                    EntryTranscript.PlaceholderColor = Color.Yellow;
+                    EntryTranslate.PlaceholderColor = Color.Yellow;
+                    EntryNewTag.PlaceholderColor = Color.Yellow;
+                    EntryNewTag.Text = "";
                 }
                 else
                 {
-                    Text.PlaceholderColor = Color.Red;
-                    Transcript.PlaceholderColor = Color.Red;
-                    Translate.PlaceholderColor = Color.Red;
-                    NewTag.PlaceholderColor = Color.Red;
+                    EntryText.PlaceholderColor = Color.Red;
+                    EntryTranscript.PlaceholderColor = Color.Red;
+                    EntryTranslate.PlaceholderColor = Color.Red;
+                    EntryNewTag.PlaceholderColor = Color.Red;
+                    EntryNewTag.Text = "";
                 }
                 return;
-            }               
-             MessagingCenter.Send(this, "AddItem", Item);
+            }
+          
+            MessagingCenter.Send(this, "AddItem", Item);
              await Navigation.PopAsync();
         }
 
@@ -59,21 +67,56 @@ namespace TestTask.Views
 
         void AddTag_Clicked(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(NewTag.Text))
+            if (string.IsNullOrEmpty(EntryNewTag.Text))
             {
-                if(NewTag.PlaceholderColor == Color.Red)
+                if(EntryNewTag.PlaceholderColor == Color.Red)
                 {
-                    NewTag.PlaceholderColor = Color.Yellow;
+                    EntryNewTag.PlaceholderColor = Color.Yellow;
                 }
                 else
                 {
-                    NewTag.PlaceholderColor = Color.Red;
+                    EntryNewTag.PlaceholderColor = Color.Red;
                 }
                 return;
             }
-            tags.Add("#" + NewTag.Text);          
-            AllTag.Text += NewTag.Text + " ";
-            NewTag.Text = "";
+            EntryNewTag.Text = EntryNewTag.Text.Trim();
+            tags.Add("#" + EntryNewTag.Text);          
+            AllTag.Text += EntryNewTag.Text + " ";
+            EntryNewTag.Text = "";
         }
+        void EntryName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(EntryText.Text.Length > 0)
+            if (EntryText.Text[EntryText.Text.Length-1] == (' ') )
+            {
+                EntryText.Text = Regex.Replace(EntryText.Text, @"\s+", " ");
+            }
+        }
+
+        void EntryTranscript_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (EntryTranscript.Text.Length > 0)
+                if (EntryTranscript.Text[EntryTranscript.Text.Length - 1] == (' '))
+                {
+                    EntryTranscript.Text = Regex.Replace(EntryTranscript.Text, @"\s+", " ");
+                }
+        }
+            void EntryTranslate_TextChanged(object sender, TextChangedEventArgs e)
+            {
+                if (EntryTranslate.Text.Length > 0)
+                    if (EntryTranslate.Text[EntryTranslate.Text.Length - 1] == (' '))
+                    {
+                    EntryTranslate.Text = Regex.Replace(EntryTranslate.Text, @"\s+", " ");
+                    }
+            }
+            void EntryNewTag_TextChanged(object sender, TextChangedEventArgs e)
+            {
+                if (EntryNewTag.Text.Length > 0)
+                    if (EntryNewTag.Text[EntryNewTag.Text.Length - 1] == (' '))
+                    {
+                    EntryNewTag.Text = Regex.Replace(EntryNewTag.Text, @"\s+", "");
+                    }
+            }
+        
     }
 }
