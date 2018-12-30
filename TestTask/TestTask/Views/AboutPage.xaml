@@ -2,12 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TestTask.Views.AboutPage"
-             Title="{Binding Title}"> 
-  
-        <StackLayout>
-            <Label Text="{Binding Text}"
-                   HorizontalOptions="Center"
-                   VerticalOptions="Center"/>
-        </StackLayout>
+             Title="{Binding Title}">
+
+    <AbsoluteLayout AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+
+        <Label Text="HI"
+                   AbsoluteLayout.LayoutBounds=".5, .5, 1, 1"
+                   AbsoluteLayout.LayoutFlags="All" 
+                   TextColor="AntiqueWhite"/>
+     </AbsoluteLayout>
     
 </ContentPage>

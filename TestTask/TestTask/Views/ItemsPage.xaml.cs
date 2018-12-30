@@ -50,19 +50,24 @@ namespace TestTask.Views
 
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (string.IsNullOrEmpty(e.NewTextValue))
+            var searchTag = e.NewTextValue.Trim().ToLower();
+           
+            if (string.IsNullOrEmpty(searchTag))
             {
+                
                 countItemToShow = 15;
                ItemsListView.ItemsSource = viewModel.Items.Take(countItemToShow);
             }
 
-            else if (e.NewTextValue[0].Equals('#'))
-            {                
-                ItemsListView.ItemsSource = viewModel.Items.Where(x => x.Tag.Contains(e.NewTextValue));
+            else if (searchTag[0].Equals('#'))
+            {
+              
+                ItemsListView.ItemsSource = viewModel.Items.Where(x => x.Tag.Contains(searchTag));
             }
             else
             {
-                ItemsListView.ItemsSource = viewModel.Items.Where(x => x.Text.StartsWith(e.NewTextValue.Trim()));
+                
+                ItemsListView.ItemsSource = viewModel.Items.Where(x => x.Text.StartsWith(searchTag));
             }
         }
        
@@ -90,15 +95,34 @@ namespace TestTask.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            
             if (viewModel.Items.Count == 0)
             {
                 viewModel.LoadItemsCommand.Execute(null);
+
+
             }
-            else if(string.IsNullOrEmpty(TextSearchBar.Text))
+            else if (string.IsNullOrEmpty(TextSearchBar.Text))
             {
+                ItemsListView.ItemsSource = null;
                 countItemToShow = 15;
                 ItemsListView.ItemsSource = viewModel.Items.Take(countItemToShow);
             }
+            else if (!string.IsNullOrEmpty(TextSearchBar.Text.Trim()))
+            {
+                if (TextSearchBar.Text.Trim()[0].Equals('#'))
+                {
+                    ItemsListView.ItemsSource = viewModel.Items.Where(x => x.Tag.Contains(TextSearchBar.Text.Trim().ToLower()));
+                }
+                else
+                {
+                    TextSearchBar.Text = "";
+                       countItemToShow = 15;
+                    ItemsListView.ItemsSource = viewModel.Items.Take(countItemToShow);
+                }
+            }
+           
+           
         }
     }
 }

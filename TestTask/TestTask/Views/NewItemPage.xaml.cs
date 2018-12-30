@@ -31,10 +31,10 @@ namespace TestTask.Views
 
         async void Save_Clicked(object sender, EventArgs e)
         {
-            EntryText.Text = EntryText.Text.Trim();
-            EntryTranscript.Text = EntryTranscript.Text.Trim();
-            EntryTranslate.Text = EntryTranslate.Text.Trim();
-            
+            EntryText.Text = EntryText.Text.Trim().ToLower();
+            EntryTranscript.Text = EntryTranscript.Text.Trim().ToLower();
+            EntryTranslate.Text = EntryTranslate.Text.Trim().ToLower();
+
             if (string.IsNullOrEmpty(Item.Text) || string.IsNullOrEmpty(Item.Translate) || string.IsNullOrEmpty(Item.Transcript) || Item.Tag.Count == 0 )
             {
                 if (EntryText.PlaceholderColor == Color.Red)
@@ -55,6 +55,7 @@ namespace TestTask.Views
                 }
                 return;
             }
+          
           
             MessagingCenter.Send(this, "AddItem", Item);
              await Navigation.PopAsync();
@@ -79,15 +80,15 @@ namespace TestTask.Views
                 }
                 return;
             }
-            EntryNewTag.Text = EntryNewTag.Text.Trim();
+            EntryNewTag.Text = EntryNewTag.Text.Trim().ToLower();
+           
             tags.Add("#" + EntryNewTag.Text);          
             AllTag.Text += EntryNewTag.Text + " ";
             EntryNewTag.Text = "";
         }
         void EntryName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if(EntryText.Text.Length > 0)
-            if (EntryText.Text[EntryText.Text.Length-1] == (' ') )
+            if(EntryText.Text.Length > 0 && EntryText.Text[EntryText.Text.Length-1] == (' ') )
             {
                 EntryText.Text = Regex.Replace(EntryText.Text, @"\s+", " ");
             }
@@ -95,26 +96,23 @@ namespace TestTask.Views
 
         void EntryTranscript_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (EntryTranscript.Text.Length > 0)
-                if (EntryTranscript.Text[EntryTranscript.Text.Length - 1] == (' '))
+            if (EntryTranscript.Text.Length > 0 && EntryTranscript.Text[EntryTranscript.Text.Length - 1] == (' '))
                 {
                     EntryTranscript.Text = Regex.Replace(EntryTranscript.Text, @"\s+", " ");
                 }
         }
             void EntryTranslate_TextChanged(object sender, TextChangedEventArgs e)
             {
-                if (EntryTranslate.Text.Length > 0)
-                    if (EntryTranslate.Text[EntryTranslate.Text.Length - 1] == (' '))
+                if (EntryTranslate.Text.Length > 0 && EntryTranslate.Text[EntryTranslate.Text.Length - 1] == (' '))
                     {
-                    EntryTranslate.Text = Regex.Replace(EntryTranslate.Text, @"\s+", " ");
+                         EntryTranslate.Text = Regex.Replace(EntryTranslate.Text, @"\s+", " ");
                     }
             }
             void EntryNewTag_TextChanged(object sender, TextChangedEventArgs e)
             {
-                if (EntryNewTag.Text.Length > 0)
-                    if (EntryNewTag.Text[EntryNewTag.Text.Length - 1] == (' '))
+                if (EntryNewTag.Text.Length > 0 && EntryNewTag.Text[EntryNewTag.Text.Length - 1] == (' '))
                     {
-                    EntryNewTag.Text = Regex.Replace(EntryNewTag.Text, @"\s+", "");
+                        EntryNewTag.Text = Regex.Replace(EntryNewTag.Text, @"\s+", "");
                     }
             }
         

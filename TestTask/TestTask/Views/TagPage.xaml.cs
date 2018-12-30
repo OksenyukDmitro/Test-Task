@@ -31,7 +31,7 @@ namespace TestTask.Views
         
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var searchTag = e.NewTextValue.Trim();
+            var searchTag = e.NewTextValue.Trim().ToLower();
             if (string.IsNullOrEmpty(searchTag))
             {
                 TagsListView.ItemsSource = viewModel.Tags;

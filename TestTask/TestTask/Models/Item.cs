@@ -11,5 +11,6 @@ namespace TestTask.Models
         public List<string> Tag { get; set; }
         public string Transcript { get; set; }
 
+       
     }
 }

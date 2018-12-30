@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using TestTask.Models;
 using TestTask.Views;
 using System.Windows.Input;
+using System.Linq;
 
 namespace TestTask.ViewModels
 {
@@ -34,6 +35,28 @@ namespace TestTask.ViewModels
                Items.Insert(0, newItem);
                DataStore.AddItemAsync(newItem);
            });
+            MessagingCenter.Subscribe<ItemDetailPage, Item>(this, "DeleteItem", (obj, item) =>
+            {
+                var oldItem = item as Item;
+                Items.Remove(oldItem);
+                DataStore.DeleteItemAsync(oldItem.Id);
+            });
+            MessagingCenter.Subscribe<ItemDetailPage, Item>(this, "UpdateItem", async (obj, item) =>
+            {
+                var Item = item as Item;
+                var oldItem = Items.Where((Item arg) => arg.Id == item.Id).FirstOrDefault();
+                var indexRemoveitem = Items.IndexOf(oldItem);
+                Items.Remove(oldItem);
+                if (indexRemoveitem == 0)
+                {
+                    Items.Insert(1, item);
+                }
+                else
+                {
+                    Items.Insert(0, item);
+                }
+                await DataStore.UpdateItemAsync(Item);
+                 });
         }
         async private void AddItem()
         {

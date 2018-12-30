@@ -1,32 +1,106 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:xf="clr-namespace:Xamarin.Forms"
              x:Class="TestTask.Views.ItemDetailPage"
              Title="{Binding Title}">
-    
-    <StackLayout Spacing="20" Padding="15">
-        <Label Text="{Binding Item.Text ,StringFormat='Text: {0}'}" FontSize="Medium"/>
-        <Label Text="{Binding Item.Translate ,StringFormat='Translate: {0}'}" FontSize="Medium"/>
-        <Label Text="{Binding Item.Transcript ,StringFormat='Transcript: {0}'}" FontSize="Medium"/>
-        <Label Text="Tags: " FontSize="Medium"/>
-        <ListView SeparatorVisibility="None" ItemsSource="{Binding Item.Tag}"   
-                                          HasUnevenRows="true"
-                                         >
-            <ListView.ItemTemplate >
-                <DataTemplate>
-                    <ViewCell>
-
-                        <StackLayout   >
-                            <Label Text="{Binding .}" 
-                           
+    <ContentPage.ToolbarItems>
+         <ToolbarItem Text="Save" Clicked="Save_Clicked">
+            <ToolbarItem.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="UWP" Value="save.png"/>
+                </OnPlatform>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+        <ToolbarItem Text="Delete" 
+                     Clicked="DeleteItem_Clicked"/>
+    </ContentPage.ToolbarItems>
+    <ScrollView>
+        <StackLayout Spacing="20" Padding="15">
+      
+            <StackLayout Spacing="20" Padding="15">
+                <StackLayout Orientation="Horizontal"> 
+                    <Label  x:Name ="Texts" 
+                            Text="Text" 
+                            FontSize="Medium" />
+                    <Entry x:Name ="EntryText" 
+                           TextColor="Bisque"
+                           TextChanged="EntryName_TextChanged"
+                           Text="{Binding Item.Text}"
+                           HorizontalOptions="FillAndExpand"
+                           MaxLength="30" 
+                           Placeholder = "Input word" 
+                           PlaceholderColor="Red" 
+                           FontSize="Small" Keyboard="Text" 
+                           ReturnType="Next"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Transcript"
+                           FontSize="Medium" />
+                    <Entry x:Name ="EntryTranscript" 
+                           TextColor="Bisque"
+                           TextChanged="EntryTranscript_TextChanged" 
+                           Text="{Binding Item.Transcript}"
+                           HorizontalOptions="FillAndExpand"
+                           MaxLength="30" 
+                           Placeholder = "Input transcript" 
+                           PlaceholderColor="Red" 
+                           FontSize="Small" Margin="0" 
+                           ReturnType="Next"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Translate"
+                           FontSize="Medium" />
+                    <Entry x:Name ="EntryTranslate" 
+                           TextColor="Bisque"
+                           TextChanged="EntryTranslate_TextChanged"
+                           Text="{Binding Item.Translate}" 
+                           HorizontalOptions="FillAndExpand"
+                           MaxLength="30"
+                           Placeholder = "Input translate" 
+                           PlaceholderColor="Red"
+                           FontSize="Small" 
+                           Margin="0" />
+                </StackLayout>
+                <Label Text="Tag"
+                       FontSize="Medium" />
+                <ListView x:Name="ItemListView"
+                          SeparatorVisibility="None"
+                          ItemsSource="{Binding Item.Tag}"   
+                          HasUnevenRows="true"
+                          VerticalOptions="Start">
+                    <ListView.Behaviors>
+                        <xf:AutoSizeBehavior ExtraSpace="0"/>
+                    </ListView.Behaviors>
+                    <ListView.ItemTemplate >
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout>
+                                    <Label Text="{Binding .}" 
                              LineBreakMode="WordWrap " 
                              Style="{DynamicResource ListItemTextStyle}" 
-                              FontSize="16" />
-                        </StackLayout>
-
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                             FontSize="16" />
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Entry x:Name="EntryNewTag"  
+                       TextColor="Bisque"
+                       TextChanged="EntryNewTag_TextChanged" 
+                       FontSize="Small"
+                       MaxLength="20" 
+                       Placeholder = "Input Tag" 
+                       PlaceholderColor="Red"  
+                       Margin="0"
+                       ReturnType="Done" />
+                <Button Text="Add tag" 
+                        Clicked="AddTag_Clicked" 
+                        VerticalOptions="Start"/>
+            </StackLayout>
+      
+        
+        
     </StackLayout>
+    </ScrollView>
 </ContentPage>

@@ -68,7 +68,7 @@ namespace TestTask.ViewModels
                     foreach (var tags in Tags)
                     {
 
-
+                        uniqueTag = true;
                         if (tags.Name.Equals(tag))
                         {
                             uniqueTag = false;

@@ -24,16 +24,53 @@
     <ContentPage.Content>
         <ScrollView>
         <StackLayout Spacing="20" Padding="15">
-            <Label  x:Name ="Texts" Text="Text" FontSize="Medium" />
-                <Entry x:Name ="EntryText" TextChanged="EntryName_TextChanged" Text="{Binding Item.Text}" MaxLength="30" Placeholder = "Input word" PlaceholderColor="Red"  FontSize="Small" Keyboard="Text" ReturnType="Next"/>            
-            <Label Text="Transcript" FontSize="Medium" />
-                <Entry x:Name ="EntryTranscript" TextChanged="EntryTranscript_TextChanged" Text="{Binding Item.Transcript}" MaxLength="30" Placeholder = "Input transcript" PlaceholderColor="Red"  FontSize="Small" Margin="0" ReturnType="Next"/>
-            <Label Text="Translate" FontSize="Medium" />
-                <Entry x:Name ="EntryTranslate" TextChanged="EntryTranslate_TextChanged" Text="{Binding Item.Translate}" MaxLength="30" Placeholder = "Input translate" PlaceholderColor="Red"  FontSize="Small" Margin="0" />
-            <Label Text="Tag" FontSize="Medium" />
-                <Entry x:Name="EntryNewTag"  TextChanged="EntryNewTag_TextChanged" FontSize="Small" MaxLength="20" Placeholder = "Input Tag" PlaceholderColor="Red"  Margin="0" ReturnType="Done" /> 
-            <Label x:Name="AllTag" Text="tags: "/>
-            <Button Text="Add tag" Clicked="AddTag_Clicked"/>
+            <Label  x:Name ="Texts" 
+                    Text="Text" 
+                    FontSize="Medium" />
+            <Entry x:Name ="EntryText"
+                       TextChanged="EntryName_TextChanged" 
+                       Text="{Binding Item.Text}" 
+                       MaxLength="30"
+                       Placeholder = "Input word" 
+                       PlaceholderColor="Red" 
+                       FontSize="Small"
+                       Keyboard="Text"
+                       ReturnType="Next"/>            
+            <Label Text="Transcript" 
+                   FontSize="Medium" />
+            <Entry x:Name ="EntryTranscript" 
+                       TextChanged="EntryTranscript_TextChanged"
+                       Text="{Binding Item.Transcript}"
+                       MaxLength="30"
+                       Placeholder = "Input transcript"
+                       PlaceholderColor="Red" 
+                       FontSize="Small" 
+                       Margin="0" 
+                       ReturnType="Next"/>
+            <Label Text="Translate" 
+                   FontSize="Medium" />
+            <Entry x:Name ="EntryTranslate" 
+                       TextChanged="EntryTranslate_TextChanged"
+                       Text="{Binding Item.Translate}"
+                       MaxLength="30" 
+                       Placeholder = "Input translate"
+                       PlaceholderColor="Red"  
+                       FontSize="Small" 
+                       Margin="0" />
+            <Label Text="Tag" 
+                   FontSize="Medium" />
+            <Entry x:Name="EntryNewTag"  
+                       TextChanged="EntryNewTag_TextChanged"
+                       FontSize="Small" 
+                       MaxLength="20" 
+                       Placeholder = "Input Tag" 
+                       PlaceholderColor="Red"  
+                       Margin="0"
+                       ReturnType="Done" /> 
+            <Label x:Name="AllTag" 
+                   Text="tags: "/>
+            <Button Text="Add tag" 
+                    Clicked="AddTag_Clicked"/>
          
             </StackLayout>
         </ScrollView>
